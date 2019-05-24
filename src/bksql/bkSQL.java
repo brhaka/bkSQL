@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 public class bkSQL extends javax.swing.JFrame {
     Boolean isAutoBackup = true;
@@ -27,6 +28,11 @@ public class bkSQL extends javax.swing.JFrame {
         String password = jpPassword.getText();
         String db = jtDataBase.getText();
         String saveLocation = jtSaveLocation.getText();
+
+        if(Useful.IsNotNullOrEmpty(host) || Useful.IsNotNullOrEmpty(user) || Useful.IsNotNullOrEmpty(password) || Useful.IsNotNullOrEmpty(db) || Useful.IsNotNullOrEmpty(saveLocation)) {
+            JOptionPane.showMessageDialog(rootPane, "All values are required.", "ERROR", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 	Date date = new Date();

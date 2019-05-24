@@ -9,9 +9,18 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class WinScheduler {
     protected static void CreateSchedule(String name, String path, String hour, String repeat) throws IOException, InterruptedException {
+        JFrame f = new JFrame();
+
+        if(Useful.IsNotNullOrEmpty(name) || Useful.IsNotNullOrEmpty(path) || Useful.IsNotNullOrEmpty(hour) || Useful.IsNotNullOrEmpty(repeat)) {
+            JOptionPane.showMessageDialog(f, "An critical error ocurred (0x912836).", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	Date date = new Date();
 	String today = dateFormat.format(date);
