@@ -7,10 +7,15 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="bkSQL"/>
+    <Property name="locationByPlatform" type="boolean" value="true"/>
   </Properties>
+  <AccessibilityProperties>
+    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="bkSQL by Brhaka"/>
+  </AccessibilityProperties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -27,61 +32,53 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlDatabase" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlUser" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlPassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlHost" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jlPassword" max="32767" attributes="0"/>
+                          <Component id="jlUser" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jlDatabase" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel2" pref="117" max="32767" attributes="0"/>
+                          <Component id="jlHost" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jrAuto" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jrManual" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="206" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="jtUser" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtHost" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jtSaveLocation" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtDataBase" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jpPassword" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jrAuto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jrManual" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="186" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="jtUser" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jtHost" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jtSaveLocation" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jtDataBase" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jpPassword" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jpComputerPassword" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jlHour" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jlRepeat" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="42" pref="42" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jcRepeat" max="32767" attributes="0"/>
-                                  <Component id="jtHour" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jlRepeat" pref="70" max="32767" attributes="0"/>
+                          <Component id="jlHour" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jtHour" max="32767" attributes="0"/>
+                          <Component id="jcRepeat" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,21 +110,26 @@
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtSaveLocation" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="8" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jpComputerPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="7" max="32767" attributes="0"/>
               <Component id="jrManual" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jrAuto" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jlHour" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtHour" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jlRepeat" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcRepeat" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jcRepeat" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlRepeat" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -175,7 +177,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Generate"/>
+        <Property name="text" type="java.lang.String" value="Create"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
@@ -197,10 +199,11 @@
     <Component class="javax.swing.JComboBox" name="jcRepeat">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="4">
             <StringItem index="0" value="Daily"/>
             <StringItem index="1" value="Weekly"/>
             <StringItem index="2" value="Monthly"/>
+            <StringItem index="3" value="Once"/>
           </StringArray>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -266,6 +269,13 @@
       <Events>
         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseReleased"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Current User Password"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="jpComputerPassword">
     </Component>
   </SubComponents>
 </Form>

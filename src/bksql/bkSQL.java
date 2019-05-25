@@ -9,11 +9,13 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.IOException;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 public class bkSQL extends javax.swing.JFrame {
     Boolean isAutoBackup = true;
@@ -22,12 +24,13 @@ public class bkSQL extends javax.swing.JFrame {
         initComponents();
     }
 
-    private void Generate() throws InterruptedException {
+    private void Generate() throws InterruptedException, SAXException, ParserConfigurationException {
         String host = jtHost.getText();
         String user = jtUser.getText();
         String password = jpPassword.getText();
         String db = jtDataBase.getText();
         String saveLocation = jtSaveLocation.getText();
+        String computerPass = jpComputerPassword.getText();
 
         if(Useful.IsNotNullOrEmpty(host) || Useful.IsNotNullOrEmpty(user) || Useful.IsNotNullOrEmpty(password) || Useful.IsNotNullOrEmpty(db) || Useful.IsNotNullOrEmpty(saveLocation)) {
             JOptionPane.showMessageDialog(rootPane, "All values are required.", "ERROR", JOptionPane.WARNING_MESSAGE);
@@ -36,7 +39,9 @@ public class bkSQL extends javax.swing.JFrame {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 	Date date = new Date();
-	String path = ".\\bat\\" + dateFormat.format(date) + ".bat";
+	String path = ".\\bat\\" + db + "_" + dateFormat.format(date) + ".bat";
+        String pathND = path.replaceFirst(".", "");
+        String pathNB = "\\bat";
 
         String mysqldump = System.getProperty("user.dir") + "\\lib\\mysqldump.exe";
 
@@ -67,7 +72,9 @@ public class bkSQL extends javax.swing.JFrame {
                     repeat = "MONTHLY";
                 }
 
-                WinScheduler.CreateSchedule("bkSQL_" + db, System.getProperty("user.dir") + path, jtHour.getText(), repeat);
+                WinScheduler.CreateSchedule("bkSQL_" + db, System.getProperty("user.dir") + pathND, System.getProperty("user.dir") + pathNB, jtHour.getText(), repeat, db, computerPass);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Successfuly created backup files!", "Success!", JOptionPane.PLAIN_MESSAGE);
             }
         } catch (IOException ex) {
             Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,8 +122,12 @@ public class bkSQL extends javax.swing.JFrame {
         jrAuto = new javax.swing.JRadioButton();
         jtHour = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jpComputerPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("bkSQL");
+        setLocationByPlatform(true);
 
         jlHost.setText("Host");
 
@@ -128,7 +139,7 @@ public class bkSQL extends javax.swing.JFrame {
 
         jLabel5.setText("Save Location");
 
-        jButton1.setText("Generate");
+        jButton1.setText("Create");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -140,7 +151,7 @@ public class bkSQL extends javax.swing.JFrame {
 
         jlRepeat.setText("Repeat");
 
-        jcRepeat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Daily", "Weekly", "Monthly" }));
+        jcRepeat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Daily", "Weekly", "Monthly", "Once" }));
         jcRepeat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         buttonGroup1.add(jrManual);
@@ -187,6 +198,8 @@ public class bkSQL extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Current User Password");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,43 +208,39 @@ public class bkSQL extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlDatabase, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlUser, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlHost, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jrAuto)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jrManual)
-                                        .addGap(0, 206, Short.MAX_VALUE))
-                                    .addComponent(jtUser)
-                                    .addComponent(jtHost, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jtSaveLocation)
-                                    .addComponent(jtDataBase, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jpPassword, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addContainerGap())))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jlPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlDatabase, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                            .addComponent(jlHost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jlHour, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlRepeat, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(42, 42, 42)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcRepeat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jtHour))))
-                        .addContainerGap())))
+                                    .addComponent(jrAuto)
+                                    .addComponent(jrManual))
+                                .addGap(0, 186, Short.MAX_VALUE))
+                            .addComponent(jtUser)
+                            .addComponent(jtHost, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtSaveLocation)
+                            .addComponent(jtDataBase, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jpPassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jpComputerPassword)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jlRepeat, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                            .addComponent(jlHour, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtHour)
+                            .addComponent(jcRepeat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,32 +265,43 @@ public class bkSQL extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtSaveLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jpComputerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jrManual)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jrAuto)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlHour)
                     .addComponent(jtHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlRepeat)
-                    .addComponent(jcRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlRepeat))
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel1))
                 .addContainerGap())
         );
 
+        getAccessibleContext().setAccessibleDescription("bkSQL by Brhaka");
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
         try {
             Generate();
         } catch (InterruptedException ex) {
+            Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
             Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1MouseReleased
@@ -335,6 +355,7 @@ public class bkSQL extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(bkSQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -348,6 +369,7 @@ public class bkSQL extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JComboBox<String> jcRepeat;
     private javax.swing.JLabel jlDatabase;
@@ -356,6 +378,7 @@ public class bkSQL extends javax.swing.JFrame {
     private javax.swing.JLabel jlPassword;
     private javax.swing.JLabel jlRepeat;
     private javax.swing.JLabel jlUser;
+    private javax.swing.JPasswordField jpComputerPassword;
     private javax.swing.JPasswordField jpPassword;
     private javax.swing.JRadioButton jrAuto;
     private javax.swing.JRadioButton jrManual;
