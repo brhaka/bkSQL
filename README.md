@@ -7,5 +7,5 @@ After that, you can easily configure a **Schedule** to auto-backup, setting up t
 
 You can visualize and delete specific backup configuration or delete all.
 
-This is a **NetBeans IDE 8.2** - **Java project**. Always before a commit I make a build, that can be found on "/dist/".
+This is a **NetBeans IDE 8.2** - **Java project**.
 Feel free to make improvements to bkSQL.
