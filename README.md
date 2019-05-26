@@ -5,7 +5,11 @@ bkSQL will auto-backup your remote DataBases.
 You need to enter some info, like **Host**, **User**, **Password**, **DB** to backup, the **Path** to save backup files and **Loggedin User Password** (Optional).
 After that, you can easily configure a **Schedule** to auto-backup, setting up the time/hour and "repeat rate".
 
-You can visualize and delete specific backup configuration or delete all.
-
+You can visualize and delete specific backup configuration or delete all. <br />
 This is a **NetBeans IDE 8.2** - **Java project**.
-Feel free to make improvements to bkSQL.
+
+<br />
+<br />
+
+Contact: support@brhaka.com <br />
+WebSite: https://brhaka.com
