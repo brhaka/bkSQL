@@ -40,6 +40,10 @@ public class bkSQL extends javax.swing.JFrame {
             new File(APPDATA+"\\xml").mkdir();
             System.out.println("bkSQL's xml folder succesfully created!");
         }
+        if(!new File(APPDATA+"\\exe").exists()) {
+            new File(APPDATA+"\\exe").mkdir();
+            System.out.println("bkSQL's exe folder succesfully created!");
+        }
 
         String host = jtHost.getText();
         String user = jtUser.getText();
@@ -55,7 +59,8 @@ public class bkSQL extends javax.swing.JFrame {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 	Date date = new Date();
-	String path = APPDATA + "\\bat\\" + db + "_" + dateFormat.format(date) + ".bat";
+        String batName = dateFormat.format(date) + ".bat";
+	String path = APPDATA + "\\bat\\" + db + "_" + batName;
         String pathNB = APPDATA + "\\bat";
 
         String mysqldump = System.getProperty("user.dir") + "\\lib\\mysqldump.exe";
@@ -90,7 +95,7 @@ public class bkSQL extends javax.swing.JFrame {
                     repeat = "DOONCE";
                 }
 
-                WinScheduler.CreateSchedule("bkSQL_" + db, path, pathNB, jtHour.getText(), repeat, db, computerPass, "create");
+                WinScheduler.CreateSchedule("bkSQL_" + db, path, pathNB, batName, jtHour.getText(), repeat, db, computerPass, "create");
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Successfuly created backup files!", "Success!", JOptionPane.PLAIN_MESSAGE);
             }

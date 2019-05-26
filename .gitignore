@@ -1,3 +1,6 @@
 *.bat
 *.xml
+*.exe
 /dist/
+/build/
+/nbproject/private/
