@@ -48,7 +48,7 @@ public class bkSQL extends javax.swing.JFrame {
         String saveLocation = jtSaveLocation.getText();
         String computerPass = jpComputerPassword.getText();
 
-        if(Useful.IsNotNullOrEmpty(host) || Useful.IsNotNullOrEmpty(user) || Useful.IsNotNullOrEmpty(password) || Useful.IsNotNullOrEmpty(db) || Useful.IsNotNullOrEmpty(saveLocation)) {
+        if(Useful.IsNullOrEmpty(host) || Useful.IsNullOrEmpty(user) || Useful.IsNullOrEmpty(password) || Useful.IsNullOrEmpty(db) || Useful.IsNullOrEmpty(saveLocation)) {
             JOptionPane.showMessageDialog(rootPane, "All values are required.", "ERROR", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -90,7 +90,7 @@ public class bkSQL extends javax.swing.JFrame {
                     repeat = "DOONCE";
                 }
 
-                WinScheduler.CreateSchedule("bkSQL_" + db, path, pathNB, jtHour.getText(), repeat, db, computerPass);
+                WinScheduler.CreateSchedule("bkSQL_" + db, path, pathNB, jtHour.getText(), repeat, db, computerPass, "create");
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Successfuly created backup files!", "Success!", JOptionPane.PLAIN_MESSAGE);
             }
@@ -117,60 +117,106 @@ public class bkSQL extends javax.swing.JFrame {
         isAutoBackup = true;
     }
 
+    private void DeleteAll() {
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Are you sure that you want to delete ALL BACKUP CONFIGURATIONS? This action can't be undone.", "Are you sure?", JOptionPane.YES_NO_OPTION);
+
+        if(resp == JOptionPane.YES_OPTION) {
+            if(new File(APPDATA).exists()) {
+                Useful.DeleteEntireDirectory(APPDATA);
+                System.out.println("Backup configurations successfuly deleted.");
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jlNameClick = new javax.swing.JLabel();
+        jlName = new javax.swing.JLabel();
+        jTabbedPane = new javax.swing.JTabbedPane();
+        jpHome = new javax.swing.JPanel();
         jlHost = new javax.swing.JLabel();
-        jlUser = new javax.swing.JLabel();
         jlPassword = new javax.swing.JLabel();
+        jlUser = new javax.swing.JLabel();
         jlDatabase = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jlSaveLocation = new javax.swing.JLabel();
         jtSaveLocation = new javax.swing.JTextField();
         jtDataBase = new javax.swing.JTextField();
         jtUser = new javax.swing.JTextField();
         jtHost = new javax.swing.JTextField();
         jpPassword = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        jbCreate = new javax.swing.JButton();
         jlHour = new javax.swing.JLabel();
         jlRepeat = new javax.swing.JLabel();
         jcRepeat = new javax.swing.JComboBox<>();
         jrManual = new javax.swing.JRadioButton();
         jrAuto = new javax.swing.JRadioButton();
         jtHour = new javax.swing.JFormattedTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jlByBrhaka = new javax.swing.JLabel();
+        jlCurrentPassword = new javax.swing.JLabel();
         jpComputerPassword = new javax.swing.JPasswordField();
+        jpOthers = new javax.swing.JPanel();
+        jbDeleteAll = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("bkSQL");
         setLocationByPlatform(true);
+        setResizable(false);
 
-        jlHost.setText("Host");
-
-        jlUser.setText("Password");
-
-        jlPassword.setText("User");
-
-        jlDatabase.setText("DataBase");
-
-        jLabel5.setText("Save Location");
-
-        jButton1.setText("Create");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlNameClick.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlNameClick.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton1MouseReleased(evt);
+                jlNameClickMouseReleased(evt);
             }
         });
 
+        jlName.setFont(new java.awt.Font("Unispace", 0, 24)); // NOI18N
+        jlName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlName.setText("bkSQL");
+        jlName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jpHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jlHost.setText("Host");
+        jpHome.add(jlHost, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, 117, -1));
+
+        jlPassword.setText("Password");
+        jpHome.add(jlPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 66, 117, -1));
+
+        jlUser.setText("User");
+        jpHome.add(jlUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 117, -1));
+
+        jlDatabase.setText("DataBase");
+        jpHome.add(jlDatabase, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 92, 117, -1));
+
+        jlSaveLocation.setText("Save Location");
+        jpHome.add(jlSaveLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 118, 117, -1));
+        jpHome.add(jtSaveLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 115, 255, -1));
+        jpHome.add(jtDataBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 89, 255, -1));
+        jpHome.add(jtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 37, 255, -1));
+        jpHome.add(jtHost, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 11, 255, -1));
+        jpHome.add(jpPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 63, 255, -1));
+
+        jbCreate.setText("Create");
+        jbCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbCreate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jbCreateMouseReleased(evt);
+            }
+        });
+        jpHome.add(jbCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+
         jlHour.setText("Hour");
+        jpHome.add(jlHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 70, -1));
 
         jlRepeat.setText("Repeat");
+        jpHome.add(jlRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 70, -1));
 
         jcRepeat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Daily", "Weekly", "Monthly", "Once" }));
         jcRepeat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jpHome.add(jcRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 296, -1));
 
         buttonGroup1.add(jrManual);
         jrManual.setText("Manual backup");
@@ -180,6 +226,7 @@ public class bkSQL extends javax.swing.JFrame {
                 jrManualMouseReleased(evt);
             }
         });
+        jpHome.add(jrManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
 
         buttonGroup1.add(jrAuto);
         jrAuto.setSelected(true);
@@ -190,6 +237,7 @@ public class bkSQL extends javax.swing.JFrame {
                 jrAutoMouseReleased(evt);
             }
         });
+        jpHome.add(jrAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
 
         try {
             jtHour.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
@@ -205,106 +253,59 @@ public class bkSQL extends javax.swing.JFrame {
                 jtHourFocusLost(evt);
             }
         });
+        jpHome.add(jtHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 296, -1));
 
-        jLabel1.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel1.setText("by Brhaka");
-        jLabel1.setToolTipText("https://brhaka.com");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlByBrhaka.setForeground(new java.awt.Color(0, 51, 255));
+        jlByBrhaka.setText("by Brhaka");
+        jlByBrhaka.setToolTipText("https://brhaka.com");
+        jlByBrhaka.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlByBrhaka.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabel1MouseReleased(evt);
+                jlByBrhakaMouseReleased(evt);
             }
         });
+        jpHome.add(jlByBrhaka, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, -1, -1));
 
-        jLabel2.setText("Current User Password");
+        jlCurrentPassword.setText("Current User Password");
+        jpHome.add(jlCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 144, 117, -1));
+        jpHome.add(jpComputerPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 141, 255, -1));
+
+        jTabbedPane.addTab("Home", jpHome);
+
+        jpOthers.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jbDeleteAll.setText("Delete all Backup Configurations");
+        jbDeleteAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jbDeleteAllMouseReleased(evt);
+            }
+        });
+        jpOthers.add(jbDeleteAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, 30));
+
+        jTabbedPane.addTab("Others", jpOthers);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jlPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlDatabase, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                            .addComponent(jlHost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jrAuto)
-                                    .addComponent(jrManual))
-                                .addGap(0, 186, Short.MAX_VALUE))
-                            .addComponent(jtUser)
-                            .addComponent(jtHost, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtSaveLocation)
-                            .addComponent(jtDataBase, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jpPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jpComputerPassword)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jlRepeat, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                            .addComponent(jlHour, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtHour)
-                            .addComponent(jcRepeat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                .addGap(156, 156, 156)
+                .addComponent(jlNameClick, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jlName, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlNameClick, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlHost)
-                    .addComponent(jtHost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlPassword)
-                    .addComponent(jtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlUser)
-                    .addComponent(jpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlDatabase)
-                    .addComponent(jtDataBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jtSaveLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jpComputerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jrManual)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jrAuto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlHour)
-                    .addComponent(jtHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlRepeat))
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1))
-                .addContainerGap())
+                .addGap(21, 21, 21)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jlName, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        jTabbedPane.getAccessibleContext().setAccessibleName("Home");
 
         getAccessibleContext().setAccessibleDescription("bkSQL by Brhaka");
 
@@ -312,7 +313,43 @@ public class bkSQL extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+    private void jlNameClickMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlNameClickMouseReleased
+        try {
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create("https://github.com/brhaka/bkSQL"));
+        } catch (IOException ex) {
+            Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jlNameClickMouseReleased
+
+    private void jlByBrhakaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlByBrhakaMouseReleased
+        try {
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create("https://brhaka.com"));
+        } catch (IOException ex) {
+            Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jlByBrhakaMouseReleased
+
+    private void jtHourFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtHourFocusLost
+        if("  :  :  ".equals(jtHour.getText())) {
+            jtHour.setText("00:00:00");
+        }
+    }//GEN-LAST:event_jtHourFocusLost
+
+    private void jtHourFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtHourFocusGained
+        if("00:00:00".equals(jtHour.getText())) {
+            jtHour.setText("");
+        }
+    }//GEN-LAST:event_jtHourFocusGained
+
+    private void jrAutoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrAutoMouseReleased
+        Auto();
+    }//GEN-LAST:event_jrAutoMouseReleased
+
+    private void jrManualMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrManualMouseReleased
+        Manual();
+    }//GEN-LAST:event_jrManualMouseReleased
+
+    private void jbCreateMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCreateMouseReleased
         try {
             Generate();
         } catch (InterruptedException ex) {
@@ -322,35 +359,11 @@ public class bkSQL extends javax.swing.JFrame {
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1MouseReleased
+    }//GEN-LAST:event_jbCreateMouseReleased
 
-    private void jrManualMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrManualMouseReleased
-        Manual();
-    }//GEN-LAST:event_jrManualMouseReleased
-
-    private void jrAutoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrAutoMouseReleased
-        Auto();
-    }//GEN-LAST:event_jrAutoMouseReleased
-
-    private void jtHourFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtHourFocusGained
-        if("00:00:00".equals(jtHour.getText())) {
-            jtHour.setText("");
-        }
-    }//GEN-LAST:event_jtHourFocusGained
-
-    private void jtHourFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtHourFocusLost
-        if("  :  :  ".equals(jtHour.getText())) {
-            jtHour.setText("00:00:00");
-        }
-    }//GEN-LAST:event_jtHourFocusLost
-
-    private void jLabel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseReleased
-        try {
-            java.awt.Desktop.getDesktop().browse(java.net.URI.create("https://brhaka.com"));
-        } catch (IOException ex) {
-            Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jLabel1MouseReleased
+    private void jbDeleteAllMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbDeleteAllMouseReleased
+        DeleteAll();
+    }//GEN-LAST:event_jbDeleteAllMouseReleased
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -385,18 +398,24 @@ public class bkSQL extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JButton jbCreate;
+    private javax.swing.JButton jbDeleteAll;
     private javax.swing.JComboBox<String> jcRepeat;
+    private javax.swing.JLabel jlByBrhaka;
+    private javax.swing.JLabel jlCurrentPassword;
     private javax.swing.JLabel jlDatabase;
     private javax.swing.JLabel jlHost;
     private javax.swing.JLabel jlHour;
+    private javax.swing.JLabel jlName;
+    private javax.swing.JLabel jlNameClick;
     private javax.swing.JLabel jlPassword;
     private javax.swing.JLabel jlRepeat;
+    private javax.swing.JLabel jlSaveLocation;
     private javax.swing.JLabel jlUser;
     private javax.swing.JPasswordField jpComputerPassword;
+    private javax.swing.JPanel jpHome;
+    private javax.swing.JPanel jpOthers;
     private javax.swing.JPasswordField jpPassword;
     private javax.swing.JRadioButton jrAuto;
     private javax.swing.JRadioButton jrManual;

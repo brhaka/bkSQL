@@ -20,10 +20,10 @@ import org.xml.sax.SAXException;
 public class WinScheduler {
     private static final String APPDATA = System.getenv("APPDATA") + "\\bkSQL";
 
-    protected static void CreateSchedule(String name, String path, String pathNB, String hour, String repeat, String db, String password) throws IOException, InterruptedException, SAXException, ParserConfigurationException {
+    protected static void CreateSchedule(String name, String path, String pathNB, String hour, String repeat, String db, String password, String action) throws IOException, InterruptedException, SAXException, ParserConfigurationException {
         JFrame rootPane = new JFrame();
 
-        if(Useful.IsNotNullOrEmpty(name) || Useful.IsNotNullOrEmpty(path) || Useful.IsNotNullOrEmpty(hour) || Useful.IsNotNullOrEmpty(repeat) || Useful.IsNotNullOrEmpty(db) || Useful.IsNotNullOrEmpty(pathNB) || Useful.IsNotNullOrEmpty(password)) {
+        if(Useful.IsNullOrEmpty(name) || Useful.IsNullOrEmpty(path) || Useful.IsNullOrEmpty(hour) || Useful.IsNullOrEmpty(repeat) || Useful.IsNullOrEmpty(db) || Useful.IsNullOrEmpty(pathNB) || Useful.IsNullOrEmpty(password) || Useful.IsNullOrEmpty(action)) {
             JOptionPane.showMessageDialog(rootPane, "An critical error ocurred (0x912836).", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
