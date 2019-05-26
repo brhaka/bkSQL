@@ -6,6 +6,7 @@
 package bksql;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,13 +19,28 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 public class bkSQL extends javax.swing.JFrame {
-    Boolean isAutoBackup = true;
+    private static final String APPDATA = System.getenv("APPDATA") + "\\bkSQL";
+    private Boolean isAutoBackup = true;
 
     public bkSQL() {
         initComponents();
     }
 
     private void Generate() throws InterruptedException, SAXException, ParserConfigurationException {
+        System.out.println("AppData: "+APPDATA);
+        if(!new File(APPDATA).exists()) {
+            new File(APPDATA).mkdir();
+            System.out.println("bkSQL's APPDATA folder succesfully created!");
+        }
+        if(!new File(APPDATA+"\\bat").exists()) {
+            new File(APPDATA+"\\bat").mkdir();
+            System.out.println("bkSQL's bat folder succesfully created!");
+        }
+        if(!new File(APPDATA+"\\xml").exists()) {
+            new File(APPDATA+"\\xml").mkdir();
+            System.out.println("bkSQL's xml folder succesfully created!");
+        }
+
         String host = jtHost.getText();
         String user = jtUser.getText();
         String password = jpPassword.getText();
@@ -39,9 +55,8 @@ public class bkSQL extends javax.swing.JFrame {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 	Date date = new Date();
-	String path = ".\\bat\\" + db + "_" + dateFormat.format(date) + ".bat";
-        String pathND = path.replaceFirst(".", "");
-        String pathNB = "\\bat";
+	String path = APPDATA + "\\bat\\" + db + "_" + dateFormat.format(date) + ".bat";
+        String pathNB = APPDATA + "\\bat";
 
         String mysqldump = System.getProperty("user.dir") + "\\lib\\mysqldump.exe";
 
@@ -71,8 +86,11 @@ public class bkSQL extends javax.swing.JFrame {
                 if(jcRepeat.getSelectedItem() == "Monthly") {
                     repeat = "MONTHLY";
                 }
+                if(jcRepeat.getSelectedItem() == "Once") {
+                    repeat = "DOONCE";
+                }
 
-                WinScheduler.CreateSchedule("bkSQL_" + db, System.getProperty("user.dir") + pathND, System.getProperty("user.dir") + pathNB, jtHour.getText(), repeat, db, computerPass);
+                WinScheduler.CreateSchedule("bkSQL_" + db, path, pathNB, jtHour.getText(), repeat, db, computerPass);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Successfuly created backup files!", "Success!", JOptionPane.PLAIN_MESSAGE);
             }
@@ -355,7 +373,7 @@ public class bkSQL extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(bkSQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

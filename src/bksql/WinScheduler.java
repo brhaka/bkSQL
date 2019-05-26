@@ -18,6 +18,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 public class WinScheduler {
+    private static final String APPDATA = System.getenv("APPDATA") + "\\bkSQL";
+
     protected static void CreateSchedule(String name, String path, String pathNB, String hour, String repeat, String db, String password) throws IOException, InterruptedException, SAXException, ParserConfigurationException {
         JFrame rootPane = new JFrame();
 
@@ -30,13 +32,13 @@ public class WinScheduler {
         DateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");
 	Date date = new Date();
         String formaDay = dayFormat.format(date);
-	String dateToSchedule =formaDay + "T" + hour;
+	String dateToSchedule = formaDay + "T" + hour;
         String today = dateFormat.format(date);
 
         InetAddress addr = InetAddress.getLocalHost();
         String computerName = addr.getHostName();
         String userName = System.getProperty("user.name");
-        String xmlName = System.getProperty("user.dir") + "\\xml\\task_" + db + "_" + today + ".xml";
+        String xmlName = APPDATA + "\\xml\\task_" + db + "_" + today + ".xml";
 
         FileWriter fw = new FileWriter(xmlName);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -87,7 +89,7 @@ public class WinScheduler {
             "    CD /D \"%~dp0\"" +
             "\n\nschtasks /create /xml \"" + xmlName + "\" /tn \"" + name + "\" /ru \"" + computerName + "\\\\" + userName + "\" /rp " + password +
             "\npause";
-        String pathToBat = System.getProperty("user.dir") + "\\bat\\cmd.bat";
+        String pathToBat = APPDATA + "\\bat\\cmd.bat";
 
         FileWriter fwb = new FileWriter(pathToBat);
         BufferedWriter bwb = new BufferedWriter(fwb);
@@ -97,7 +99,9 @@ public class WinScheduler {
         bwb.close();
         fwb.close();
 
-        command = "cmd /K start cmd.exe /K \"C:\\WINDOWS\\system32\\cmd.exe /K " + pathToBat + "\"";
+        command = "cmd /K start cmd.exe /K \"C:\\WINDOWS\\system32\\cmd.exe /K \"" + pathToBat + "\"\"";
+
+        System.out.println(command);
 
         Runtime.getRuntime().exec(command);
 
