@@ -4,7 +4,7 @@ bkSQL will auto-backup your remote DataBases.
 
 ## Getting Started
 
-This is a **NetBeans IDE 8.2** - **Java project**. <br />
+This is a **NetBeans IDE 8.2** - **Java project**, for **Windows** users. <br />
 
 bkSQL will create backup configurations for you to manually or automatically backup your remote DataBases. <br />
 It uses [MySQLDump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html), .bat files (converted to .exe, for security reasons), .xml, and more. <br />
