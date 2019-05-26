@@ -62,7 +62,7 @@ After installing JDK, JRE, NetBeans and after clone bkSQL, open up NetBeans, cli
 
 ## License
 
-This project is licensed under the GPL-2.0 License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GPL-2.0 License - see the [LICENSE](LICENSE) file for details
 
 ## Contact
 
