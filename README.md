@@ -66,5 +66,5 @@ This project is licensed under the GPL-2.0 License - see the [LICENSE](LICENSE) 
 
 ## Contact
 
-E-mail: support@brhaka.com <br />
+E-Mail: support@brhaka.com <br />
 WebSite: https://brhaka.com
