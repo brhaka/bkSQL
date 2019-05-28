@@ -60,8 +60,11 @@ public class bkSQL extends javax.swing.JFrame {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 	Date date = new Date();
         String batName = dateFormat.format(date) + ".bat";
+        String exeName = dateFormat.format(date) + ".exe";
 	String path = APPDATA + "\\bat\\" + db + "_" + batName;
         String pathNB = APPDATA + "\\bat";
+        String pathEXE = APPDATA + "\\exe\\" + db + "_" + exeName;
+        String pathNE = APPDATA + "\\exe";
 
         String mysqldump = System.getProperty("user.dir") + "\\lib\\mysqldump.exe";
 
@@ -95,7 +98,7 @@ public class bkSQL extends javax.swing.JFrame {
                     repeat = "DOONCE";
                 }
 
-                WinScheduler.CreateSchedule("bkSQL_" + db, path, pathNB, batName, jtHour.getText(), repeat, db, computerPass, "create");
+                WinScheduler.CreateSchedule("bkSQL_" + db, path, pathNB, batName, jtHour.getText(), repeat, db, computerPass, "create", pathEXE, pathNE);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Successfuly created backup files!", "Success!", JOptionPane.PLAIN_MESSAGE);
             }

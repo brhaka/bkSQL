@@ -23,10 +23,10 @@ import org.xml.sax.SAXException;
 public class WinScheduler {
     private static final String APPDATA = System.getenv("APPDATA") + "\\bkSQL";
 
-    protected static void CreateSchedule(String name, String path, String pathNB, String batName, String hour, String repeat, String db, String password, String action) throws IOException, InterruptedException, SAXException, ParserConfigurationException {
+    protected static void CreateSchedule(String name, String path, String pathNB, String batName, String hour, String repeat, String db, String password, String action, String pathEXE, String pathNE) throws IOException, InterruptedException, SAXException, ParserConfigurationException {
         JFrame rootPane = new JFrame();
 
-        if(Useful.IsNullOrEmpty(name) || Useful.IsNullOrEmpty(path) || Useful.IsNullOrEmpty(hour) || Useful.IsNullOrEmpty(repeat) || Useful.IsNullOrEmpty(db) || Useful.IsNullOrEmpty(pathNB) || Useful.IsNullOrEmpty(batName) || Useful.IsNullOrEmpty(password) || Useful.IsNullOrEmpty(action)) {
+        if(Useful.IsNullOrEmpty(name) || Useful.IsNullOrEmpty(path) || Useful.IsNullOrEmpty(hour) || Useful.IsNullOrEmpty(repeat) || Useful.IsNullOrEmpty(db) || Useful.IsNullOrEmpty(pathNB) || Useful.IsNullOrEmpty(batName) || Useful.IsNullOrEmpty(password) || Useful.IsNullOrEmpty(action) || Useful.IsNullOrEmpty(pathNE) || Useful.IsNullOrEmpty(pathEXE)) {
             JOptionPane.showMessageDialog(rootPane, "An critical error ocurred (0x912836).", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -53,8 +53,8 @@ public class WinScheduler {
         xml = xml.replace("[USER]", userName);
         xml = xml.replace("[NAME]", name);
         xml = xml.replace("[START_DATE]", dateToSchedule);
-        xml = xml.replace("[PATH_W_BAT]", path);
-        xml = xml.replace("[PATH_N_BAT]", pathNB);
+        xml = xml.replace("[PATH_W_BAT]", "\"" + pathEXE + "\"");
+        xml = xml.replace("[PATH_N_BAT]", "\"" + pathNE + "\"");
 
         bw.write(xml);
 
