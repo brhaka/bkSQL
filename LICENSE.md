@@ -6,6 +6,8 @@ Everyone is permitted to copy and distribute verbatim
 copies of this license document, but changing it is
 not allowed.
 
+<br/>
+
 ## TERMS AND CONDITIONS
 
 #### 0. Definitions.
@@ -94,6 +96,8 @@ Since it is intended for sharing as reference, there is no
 warranty, of either the source code, or the program compiled
 from it. The entire risk of quality or performance of the 
 program is with you.
+
+<br/>
 
 <br/>
 
