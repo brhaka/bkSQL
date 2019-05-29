@@ -66,7 +66,7 @@ If you're getting any errors, take a look at the [ERRORS](errors.md) file for de
 
 ## License
 
-This project is licensed under the GPL-2.0 License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the **RECEX SHARED SOURCE LICENSE** (1.0) License - see the [LICENSE](LICENSE.md) file for details
 
 ## Contact
 
