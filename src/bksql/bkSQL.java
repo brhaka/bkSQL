@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.IOException;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -25,10 +26,13 @@ import org.xml.sax.SAXException;
 public class bkSQL extends javax.swing.JFrame {
     private static final String APPDATA = System.getenv("APPDATA") + "\\bkSQL";
     private static final String LICENSE = GetLicense.License();
+    private static ImageIcon icon = new ImageIcon("icon/bkSQL-logo.png");
     private Boolean isAutoBackup = true;
 
     public bkSQL() {
         initComponents();
+
+        setIconImage(icon.getImage());
     }
 
     private void Generate() throws InterruptedException, SAXException, ParserConfigurationException {
@@ -320,7 +324,7 @@ public class bkSQL extends javax.swing.JFrame {
 
         jTabbedPane.getAccessibleContext().setAccessibleName("Home");
 
-        getAccessibleContext().setAccessibleDescription("bkSQL by Brhaka");
+        getAccessibleContext().setAccessibleDescription("bkSQL");
 
         pack();
         setLocationRelativeTo(null);

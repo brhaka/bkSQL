@@ -12,7 +12,7 @@
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <AccessibilityProperties>
-    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="bkSQL by Brhaka"/>
+    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="bkSQL"/>
   </AccessibilityProperties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
