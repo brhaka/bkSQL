@@ -58,7 +58,7 @@ After installing JDK, JRE, NetBeans and after clone bkSQL, open up NetBeans, cli
 ## Authors
 
 * **Brhaka** - *Company* - [brhaka-Github](https://github.com/brhaka), [brhaka-WebSite](https://brhaka.com)
-* **Eduardo J Martinez** - *Developer* - [WebSite](https://brhaka.com)
+* **Eduardo Julião Martinez** - *Developer* - [WebSite](https://brhaka.com)
 
 ## License
 
