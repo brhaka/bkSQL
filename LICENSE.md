@@ -12,17 +12,17 @@ not allowed.
 
 #### 0. Definitions.
 
-"**This License**" refers to version 1.0 of RecEx Shared
+"This License" refers to version 1.0 of RecEx Shared
 Source License.
 
-"**The program**", "**the source**", "**the source code**", "**these
-files**", "**this file**" refers to any copyrightable work
+"The program", "the source", "the source code", "these
+files", "this file" refers to any copyrightable work
 licensed under this License.
 
-"**You**" refers to the Licensee. The licensee could be a 
+"You" refers to the Licensee. The licensee could be a 
 person or a organisation.
 
-"**personal use**" refers to usage by, only and only, the
+"personal use" refers to usage by, only and only, the
 licensee, and not by any other person or organisation
 related in any way to the licensee.
 
