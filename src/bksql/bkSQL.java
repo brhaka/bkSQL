@@ -5,6 +5,7 @@
 
 package bksql;
 
+import java.awt.Dimension;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -14,12 +15,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.IOException;
 import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 public class bkSQL extends javax.swing.JFrame {
     private static final String APPDATA = System.getenv("APPDATA") + "\\bkSQL";
+    private static final String LICENSE = GetLicense.License();
     private Boolean isAutoBackup = true;
 
     public bkSQL() {
@@ -402,6 +407,29 @@ public class bkSQL extends javax.swing.JFrame {
                 new bkSQL().setVisible(true);
             }
         });
+
+        JFrame jf = new JFrame();
+
+        int resultGithub = JOptionPane.showConfirmDialog(jf, "This program is from a Open-Source GitHub repository, \nthat can be found on https://github.com/brhaka/bkSQL, \ndesigned and developed by Brhaka (https://brhaka.com).", "Please Read Carefully", JOptionPane.OK_CANCEL_OPTION);
+        if(resultGithub != JOptionPane.OK_OPTION) {
+            System.exit(0);
+        }
+
+        int resultProblems = JOptionPane.showConfirmDialog(jf, "Brhaka is not responsible for any data loss, \ncorruption, or any related problems.", "Please Read Carefully", JOptionPane.OK_CANCEL_OPTION);
+        if(resultProblems != JOptionPane.OK_OPTION) {
+            System.exit(0);
+        }
+
+        JTextArea textArea = new JTextArea(LICENSE);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
+        scrollPane.setPreferredSize(new Dimension(400, 400));
+        int resultLicense = JOptionPane.showConfirmDialog(null, scrollPane, "bkSQL - License, Please Read Carefully", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if(resultLicense != JOptionPane.OK_OPTION) {
+            System.exit(0);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
