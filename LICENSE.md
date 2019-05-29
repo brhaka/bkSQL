@@ -9,7 +9,7 @@ not allowed.
 ## TERMS AND CONDITIONS
 
 
-### 0. Definitions.
+#### 0. Definitions.
 
 "**This License**" refers to version 1.0 of RecEx Shared
 Source License.
@@ -25,7 +25,7 @@ person or a organisation.
 licensee, and not by any other person or organisation
 related in any way to the licensee.
 
-### 1. Usage
+#### 1. Usage
 
 You are free to download, copy, compile, study, and
 refer to the source code for any personal use of yours.
@@ -90,4 +90,4 @@ DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR
 THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY
 OTHER PROGRAMS)**
 
-### END OF TERMS AND CONDITIONS
+#### END OF TERMS AND CONDITIONS
