@@ -1,5 +1,5 @@
 ## RECEX SHARED SOURCE LICENSE
-### version 1.0, 30 May 2013
+#### version 1.0, 30 May 2013
 
 Copyright (c) 2013 RecEx. <http://recex.co.in>
 Everyone is permitted to copy and distribute verbatim
@@ -7,7 +7,6 @@ copies of this license document, but changing it is
 not allowed.
 
 ## TERMS AND CONDITIONS
-
 
 #### 0. Definitions.
 
@@ -25,6 +24,8 @@ person or a organisation.
 licensee, and not by any other person or organisation
 related in any way to the licensee.
 
+<br/>
+
 #### 1. Usage
 
 You are free to download, copy, compile, study, and
@@ -34,6 +35,8 @@ Usage by you of any work covered by this license should
 not, directly or indirectly, enable its usage by any
 other individual or organisation.
 
+<br/>
+
 #### 2. Modifications
 
 You are free to make any modifications to the source
@@ -42,12 +45,16 @@ the source after modifying it and using the compiled
 product obtained thereafter in compliance with this
 License.
 
+<br/>
+
 #### 3. Redistribution
 
 You may NOT under any circumstance copy, redistribute
 and/or republish the source or a work based on it (which
 includes binary or object code compiled from it) in part
 or whole. 
+
+<br/>
 
 #### 4. Non-compliance
 
@@ -56,6 +63,8 @@ Program except as expressly provided under this License.
 Any attempt otherwise to copy, modify, sublicense or
 distribute the Program is void, and will automatically
 terminate your rights under this License.
+
+<br/>
 
 #### 5. Acceptance of License
 
@@ -68,11 +77,15 @@ source), you indicate your acceptance of this License to do
 so, and all its terms and conditions for copying,
 redistributing or modifying the source or works based on it.
 
+<br/>
+
 #### 6. Permissions
 
 If you intend to incorporate the source code, in part or whole,
 into any free or proprietary program, you need to explicitly
 write to the original author(s) to ask for permission.
+
+<br/>
 
 #### 7. No Warranty
 
@@ -82,6 +95,8 @@ warranty, of either the source code, or the program compiled
 from it. The entire risk of quality or performance of the 
 program is with you.
 
+<br/>
+
 **THE ORIGINAL AUTHOR OF THE PROGRAM IS NOT LIABLE TO YOU FOR
 DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR
 CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO
@@ -89,5 +104,7 @@ USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR
 DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR
 THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY
 OTHER PROGRAMS)**
+
+<br/>
 
 #### END OF TERMS AND CONDITIONS
