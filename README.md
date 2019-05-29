@@ -55,6 +55,10 @@ NetBeans project
 After installing JDK, JRE, NetBeans and after clone bkSQL, open up NetBeans, click on File -> Open Project -> (Go to the folder were bkSQL is located and click on it) -> Open Project.
 ```
 
+## Error codes
+
+If you're getting any errors, take a look at the [ERRORS](errors.md) file for details
+
 ## Authors
 
 * **Brhaka** - *Company* - [brhaka-Github](https://github.com/brhaka), [brhaka-WebSite](https://brhaka.com)
