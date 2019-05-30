@@ -14,6 +14,11 @@ You can easily configure a **Schedule** to auto-backup, setting up the time/hour
 
 You can visualize and delete specific backup configuration or delete all.
 
+### Want to help?
+
+If you want to help bkSQL, you can do that by developing you own idea, or, a task from the [TO_DO](TO_DO.md) file.
+Thank you!
+
 ## Prerequisites
 
 What things you need to install the software and how to install them
