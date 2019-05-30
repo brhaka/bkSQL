@@ -62,7 +62,7 @@ After installing JDK, JRE, NetBeans and after clone bkSQL, open up NetBeans, cli
 
 ## Error codes
 
-If you're getting any errors, take a look at the [ERRORS](errors.md) file for details
+If you're getting any errors, take a look at the [Error Codes](https://github.com/brhaka/bkSQL/wiki/Error-Codes) Wiki page for details
 
 ## Authors
 
