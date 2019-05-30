@@ -5,6 +5,7 @@ Obviously, you can always help by developing your own idea too.
 
 ## To do:
 
+- [ ] Add checkbox for backup all DataBases on server
 - [ ] Add translations (Google Translate system)
 - [ ] Backup configurations delete
 - [ ] Backup configurations visualization
