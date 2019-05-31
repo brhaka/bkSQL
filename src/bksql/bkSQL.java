@@ -6,8 +6,11 @@
 package bksql;
 
 import java.awt.Dimension;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,24 +39,6 @@ public class bkSQL extends javax.swing.JFrame {
     }
 
     private void Generate() throws InterruptedException, SAXException, ParserConfigurationException {
-        System.out.println("AppData: "+APPDATA);
-        if(!new File(APPDATA).exists()) {
-            new File(APPDATA).mkdir();
-            System.out.println("bkSQL's APPDATA folder succesfully created!");
-        }
-        if(!new File(APPDATA+"\\bat").exists()) {
-            new File(APPDATA+"\\bat").mkdir();
-            System.out.println("bkSQL's bat folder succesfully created!");
-        }
-        if(!new File(APPDATA+"\\xml").exists()) {
-            new File(APPDATA+"\\xml").mkdir();
-            System.out.println("bkSQL's xml folder succesfully created!");
-        }
-        if(!new File(APPDATA+"\\exe").exists()) {
-            new File(APPDATA+"\\exe").mkdir();
-            System.out.println("bkSQL's exe folder succesfully created!");
-        }
-
         String host = jtHost.getText();
         String user = jtUser.getText();
         String password = jpPassword.getText();
@@ -153,6 +138,77 @@ public class bkSQL extends javax.swing.JFrame {
     private void SpecificDB() {
         jlDataBase.setEnabled(true);
         jtDataBase.setEnabled(true);
+    }
+
+    private static void CheckAppData() {
+        System.out.println("AppData: "+APPDATA);
+        if(!new File(APPDATA).exists()) {
+            new File(APPDATA).mkdir();
+            System.out.println("bkSQL's APPDATA folder succesfully created!");
+        }
+        if(!new File(APPDATA+"\\bat").exists()) {
+            new File(APPDATA+"\\bat").mkdir();
+            System.out.println("bkSQL's bat folder succesfully created!");
+        }
+        if(!new File(APPDATA+"\\xml").exists()) {
+            new File(APPDATA+"\\xml").mkdir();
+            System.out.println("bkSQL's xml folder succesfully created!");
+        }
+        if(!new File(APPDATA+"\\exe").exists()) {
+            new File(APPDATA+"\\exe").mkdir();
+            System.out.println("bkSQL's exe folder succesfully created!");
+        }
+        if(!new File(APPDATA+"\\data").exists()) {
+            new File(APPDATA+"\\data").mkdir();
+            System.out.println("bkSQL's data folder succesfully created!");
+        }
+    }
+
+    private static void Alerts() {
+        JFrame jf = new JFrame();
+        int result = 0;
+
+        int resultGithub = JOptionPane.showConfirmDialog(jf, "This program is from a Open-Source GitHub repository, \nthat can be found on https://github.com/brhaka/bkSQL, \ndesigned and developed by Brhaka (https://brhaka.com).", "Please Read Carefully", JOptionPane.OK_CANCEL_OPTION);
+        if(resultGithub != JOptionPane.OK_OPTION) {
+            System.exit(0);
+        } else {
+            result += 1;
+        }
+
+        int resultProblems = JOptionPane.showConfirmDialog(jf, "Brhaka is not responsible for any data loss, \ncorruption, or any related problems.", "Please Read Carefully", JOptionPane.OK_CANCEL_OPTION);
+        if(resultProblems != JOptionPane.OK_OPTION) {
+            System.exit(0);
+        } else {
+            result += 1;
+        }
+
+        JTextArea textArea = new JTextArea(LICENSE);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
+        scrollPane.setPreferredSize(new Dimension(400, 400));
+        int resultLicense = JOptionPane.showConfirmDialog(null, scrollPane, "bkSQL - License, Please Read Carefully", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if(resultLicense != JOptionPane.OK_OPTION) {
+            System.exit(0);
+        } else {
+            result += 1;
+        }
+
+        if(result == 3) {
+            try {
+                FileWriter fw = new FileWriter(APPDATA + "\\data\\alerts.brk");
+                BufferedWriter bw = new BufferedWriter(fw);
+
+                String content = "~´´´][]~~____-'''\"\"~";
+
+                bw.write(content);
+                bw.close();
+                fw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -335,10 +391,10 @@ public class bkSQL extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jlNameClick, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jlName, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jlName, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane.getAccessibleContext().setAccessibleName("Home");
@@ -410,6 +466,8 @@ public class bkSQL extends javax.swing.JFrame {
     }//GEN-LAST:event_jcAllDBMouseReleased
 
     public static void main(String args[]) {
+        CheckAppData();
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
@@ -439,27 +497,21 @@ public class bkSQL extends javax.swing.JFrame {
             }
         });
 
-        JFrame jf = new JFrame();
+        if(new File(APPDATA + "\\data\\alerts.brk").exists()) {
+            try {
+                FileReader fr = new FileReader(APPDATA + "\\data\\alerts.brk");
+                BufferedReader br = new BufferedReader(fr);
 
-        int resultGithub = JOptionPane.showConfirmDialog(jf, "This program is from a Open-Source GitHub repository, \nthat can be found on https://github.com/brhaka/bkSQL, \ndesigned and developed by Brhaka (https://brhaka.com).", "Please Read Carefully", JOptionPane.OK_CANCEL_OPTION);
-        if(resultGithub != JOptionPane.OK_OPTION) {
-            System.exit(0);
-        }
-
-        int resultProblems = JOptionPane.showConfirmDialog(jf, "Brhaka is not responsible for any data loss, \ncorruption, or any related problems.", "Please Read Carefully", JOptionPane.OK_CANCEL_OPTION);
-        if(resultProblems != JOptionPane.OK_OPTION) {
-            System.exit(0);
-        }
-
-        JTextArea textArea = new JTextArea(LICENSE);
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        textArea.setEditable(false);
-        scrollPane.setPreferredSize(new Dimension(400, 400));
-        int resultLicense = JOptionPane.showConfirmDialog(null, scrollPane, "bkSQL - License, Please Read Carefully", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        if(resultLicense != JOptionPane.OK_OPTION) {
-            System.exit(0);
+                if(!"~´´´][]~~____-'''\"\"~".equals(br.readLine())) {
+                    Alerts();
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(bkSQL.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            Alerts();
         }
     }
 
