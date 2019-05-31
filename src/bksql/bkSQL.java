@@ -145,6 +145,16 @@ public class bkSQL extends javax.swing.JFrame {
         }
     }
 
+    private void AllDB() {
+        jlDataBase.setEnabled(false);
+        jtDataBase.setEnabled(false);
+    }
+
+    private void SpecificDB() {
+        jlDataBase.setEnabled(true);
+        jtDataBase.setEnabled(true);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -157,7 +167,7 @@ public class bkSQL extends javax.swing.JFrame {
         jlHost = new javax.swing.JLabel();
         jlPassword = new javax.swing.JLabel();
         jlUser = new javax.swing.JLabel();
-        jlDatabase = new javax.swing.JLabel();
+        jlDataBase = new javax.swing.JLabel();
         jlSaveLocation = new javax.swing.JLabel();
         jtSaveLocation = new javax.swing.JTextField();
         jtDataBase = new javax.swing.JTextField();
@@ -174,6 +184,7 @@ public class bkSQL extends javax.swing.JFrame {
         jlByBrhaka = new javax.swing.JLabel();
         jlCurrentPassword = new javax.swing.JLabel();
         jpComputerPassword = new javax.swing.JPasswordField();
+        jcAllDB = new javax.swing.JCheckBox();
         jpOthers = new javax.swing.JPanel();
         jbDeleteAll = new javax.swing.JButton();
 
@@ -205,8 +216,8 @@ public class bkSQL extends javax.swing.JFrame {
         jlUser.setText("User");
         jpHome.add(jlUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 117, -1));
 
-        jlDatabase.setText("DataBase");
-        jpHome.add(jlDatabase, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 92, 117, -1));
+        jlDataBase.setText("DataBase");
+        jpHome.add(jlDataBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 92, 117, -1));
 
         jlSaveLocation.setText("Save Location");
         jpHome.add(jlSaveLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 118, 117, -1));
@@ -223,17 +234,17 @@ public class bkSQL extends javax.swing.JFrame {
                 jbCreateMouseReleased(evt);
             }
         });
-        jpHome.add(jbCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        jpHome.add(jbCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
 
         jlHour.setText("Hour");
-        jpHome.add(jlHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 70, -1));
+        jpHome.add(jlHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 70, -1));
 
         jlRepeat.setText("Repeat");
-        jpHome.add(jlRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 70, -1));
+        jpHome.add(jlRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 70, -1));
 
         jcRepeat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Daily", "Weekly", "Monthly", "Once" }));
         jcRepeat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpHome.add(jcRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 296, -1));
+        jpHome.add(jcRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 296, -1));
 
         buttonGroup1.add(jrManual);
         jrManual.setText("Manual backup");
@@ -243,7 +254,7 @@ public class bkSQL extends javax.swing.JFrame {
                 jrManualMouseReleased(evt);
             }
         });
-        jpHome.add(jrManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
+        jpHome.add(jrManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
 
         buttonGroup1.add(jrAuto);
         jrAuto.setSelected(true);
@@ -254,7 +265,7 @@ public class bkSQL extends javax.swing.JFrame {
                 jrAutoMouseReleased(evt);
             }
         });
-        jpHome.add(jrAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
+        jpHome.add(jrAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
 
         try {
             jtHour.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
@@ -270,7 +281,7 @@ public class bkSQL extends javax.swing.JFrame {
                 jtHourFocusLost(evt);
             }
         });
-        jpHome.add(jtHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 296, -1));
+        jpHome.add(jtHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 296, -1));
 
         jlByBrhaka.setForeground(new java.awt.Color(0, 51, 255));
         jlByBrhaka.setText("by Brhaka");
@@ -281,11 +292,19 @@ public class bkSQL extends javax.swing.JFrame {
                 jlByBrhakaMouseReleased(evt);
             }
         });
-        jpHome.add(jlByBrhaka, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, -1, -1));
+        jpHome.add(jlByBrhaka, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, -1, -1));
 
         jlCurrentPassword.setText("Current User Password");
         jpHome.add(jlCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 144, 117, -1));
         jpHome.add(jpComputerPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 141, 255, -1));
+
+        jcAllDB.setText("Bakcup all DataBases on server");
+        jcAllDB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jcAllDBMouseReleased(evt);
+            }
+        });
+        jpHome.add(jcAllDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, -1, -1));
 
         jTabbedPane.addTab("Home", jpHome);
 
@@ -382,6 +401,14 @@ public class bkSQL extends javax.swing.JFrame {
         DeleteAll();
     }//GEN-LAST:event_jbDeleteAllMouseReleased
 
+    private void jcAllDBMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcAllDBMouseReleased
+        if(jcAllDB.isSelected()) {
+            AllDB();
+        } else {
+            SpecificDB();
+        }
+    }//GEN-LAST:event_jcAllDBMouseReleased
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -441,10 +468,11 @@ public class bkSQL extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JButton jbCreate;
     private javax.swing.JButton jbDeleteAll;
+    private javax.swing.JCheckBox jcAllDB;
     private javax.swing.JComboBox<String> jcRepeat;
     private javax.swing.JLabel jlByBrhaka;
     private javax.swing.JLabel jlCurrentPassword;
-    private javax.swing.JLabel jlDatabase;
+    private javax.swing.JLabel jlDataBase;
     private javax.swing.JLabel jlHost;
     private javax.swing.JLabel jlHour;
     private javax.swing.JLabel jlName;
