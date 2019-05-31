@@ -31,7 +31,7 @@ public class WinScheduler {
             return;
         }
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd_hh-mm-ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss");
         DateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");
 	Date date = new Date();
         String formaDay = dayFormat.format(date);
