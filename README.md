@@ -16,7 +16,8 @@ You can visualize and delete specific backup configuration or delete all.
 
 ### Want to help?
 
-If you want to help bkSQL, you can do that by developing you own idea, or, a task from the [TO_DO](TO_DO.md) file.
+If you want to help bkSQL, you can do that by developing you own idea, or, a task from the [Tasks](https://github.com/brhaka/bkSQL/projects/1) project.
+
 Thank you!
 
 ## Prerequisites
