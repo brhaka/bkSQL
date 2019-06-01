@@ -43,6 +43,9 @@ public class bkSQL extends javax.swing.JFrame {
         String user = jtUser.getText();
         String password = jpPassword.getText();
         String db = jtDataBase.getText();
+        if(jcAllDB.isSelected()) {
+            db = "all";
+        }
         String saveLocation = jtSaveLocation.getText();
         String computerPass = jpComputerPassword.getText();
 
@@ -66,11 +69,22 @@ public class bkSQL extends javax.swing.JFrame {
             FileWriter fw = new FileWriter(path);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            String content = "for /f \"tokens=2 delims==\" %%I in ('wmic os get localdatetime /format:list') do set datetime=%%I\n" +
-            "set DATET=%datetime:~0,8%-%datetime:~8,6%\n" +
-            "\n" +
-            "\"" + mysqldump + "\" --single-transaction=TRUE --host=\"" + host + "\" --user=\"" + user + "\" --password=\"" + password + "\" " + db + " > \"" + saveLocation + "\"%DATET%.sql\n" +
-            "exit";
+            String content = "";
+            if(jcAllDB.isSelected()) {
+                content = "for /f \"tokens=2 delims==\" %%I in ('wmic os get localdatetime /format:list') do set datetime=%%I\n" +
+                "set DATET=%datetime:~0,8%-%datetime:~8,6%\n" +
+                "\n" +
+                "\"" + mysqldump + "\" --single-transaction=TRUE --host=\"" + host + "\" --user=\"" + user + "\" --password=\"" + password + "\" –all-databases > \"" + saveLocation + "\"%DATET%.sql\n" +
+                "exit";
+
+                db = "all";
+            } else {
+                content = "for /f \"tokens=2 delims==\" %%I in ('wmic os get localdatetime /format:list') do set datetime=%%I\n" +
+                "set DATET=%datetime:~0,8%-%datetime:~8,6%\n" +
+                "\n" +
+                "\"" + mysqldump + "\" --single-transaction=TRUE --host=\"" + host + "\" --user=\"" + user + "\" --password=\"" + password + "\" " + db + " > \"" + saveLocation + "\"%DATET%.sql\n" +
+                "exit";
+            }
 
             bw.write(content);
             bw.close();
