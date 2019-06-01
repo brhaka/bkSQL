@@ -48,7 +48,7 @@ public class XML {
             "    <DisallowStartOnRemoteAppSession>false</DisallowStartOnRemoteAppSession>\n" +
             "    <UseUnifiedSchedulingEngine>true</UseUnifiedSchedulingEngine>\n" +
             "    <WakeToRun>false</WakeToRun>\n" +
-            "    <ExecutionTimeLimit>P1D</ExecutionTimeLimit>\n" +
+            "    <ExecutionTimeLimit>PT0S</ExecutionTimeLimit>\n" +
             "    <Priority>5</Priority>\n" +
             "  </Settings>\n" +
             "  <Actions Context=\"Author\">\n" +
