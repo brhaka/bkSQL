@@ -69,7 +69,7 @@ public class bkSQL extends javax.swing.JFrame {
             String content = "for /f \"tokens=2 delims==\" %%I in ('wmic os get localdatetime /format:list') do set datetime=%%I\n" +
             "set DATET=%datetime:~0,8%-%datetime:~8,6%\n" +
             "\n" +
-            "\"" + mysqldump + "\" --host=\"" + host + "\" --user=\"" + user + "\" --password=\"" + password + "\" " + db + " > \"" + saveLocation + "\"%DATET%.sql\n" +
+            "\"" + mysqldump + "\" --single-transaction=TRUE --host=\"" + host + "\" --user=\"" + user + "\" --password=\"" + password + "\" " + db + " > \"" + saveLocation + "\"%DATET%.sql\n" +
             "exit";
 
             bw.write(content);
