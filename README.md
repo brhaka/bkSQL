@@ -14,9 +14,9 @@ You can easily configure a **Schedule** to auto-backup, setting up the time/hour
 
 You can visualize and delete specific backup configuration or delete all.
 
-### Want to help?
+### Contribute
 
-If you want to help bkSQL, you can do that by developing you own idea, or, a task from the [Tasks](https://github.com/brhaka/bkSQL/projects/1) project.
+If you want to contribute with bkSQL, you can do that by developing your own idea, or a task from the [Tasks](https://github.com/brhaka/bkSQL/projects/1) project. We suggest you to read the [CONTRIBUTING](CONTRIBUTING.md) file and the [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) file.
 
 Thank you!
 
