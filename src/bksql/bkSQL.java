@@ -29,7 +29,7 @@ import org.xml.sax.SAXException;
 public class bkSQL extends javax.swing.JFrame {
     private static final String APPDATA = System.getenv("APPDATA") + "\\bkSQL";
     private static final String LICENSE = GetLicense.License();
-    private static ImageIcon icon = new ImageIcon("icon/bkSQL-logo.png");
+    private static ImageIcon icon = new ImageIcon("icons/bkSQL-logo.png");
     private Boolean isAutoBackup = true;
 
     public bkSQL() {
