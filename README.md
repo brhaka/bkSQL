@@ -39,6 +39,16 @@ https://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-21331
 ```
 https://www.oracle.com/technetwork/pt/java/javase/downloads/jre8-downloads-2133155.html
 
+```
+ Launch4j
+```
+http://launch4j.sourceforge.net/
+
+```
+ Inno Setup Compiler
+```
+http://www.jrsoftware.org/isdl.php
+
 ### Installing
 
 How to open bkSQL as NetBeans project and code it.
@@ -59,6 +69,30 @@ NetBeans project
 
 ```
 After installing JDK, JRE, NetBeans and after clone bkSQL, open up NetBeans, click on File -> Open Project -> (Go to the folder were bkSQL is located and click on it) -> Open Project.
+```
+
+### Compiling
+
+How to compile bkSQL.
+
+We recommend you to read the [LICENSE](LICENSE.md) before compiling.
+
+Building .jar
+
+```
+Open bkSQL on NetBeans than click on "Clean and Build Project".
+```
+
+Building .exe
+
+```
+Open Launch4j and select the buildConf_bkSQL.xml file on /bin/. After that, click on "Build wrapper".
+```
+
+Building Installer / Setup
+
+```
+Open Inno Setup Compiler and select the bkSQL.iss file on /bin/. After that, click on "Compile".
 ```
 
 ## Error codes
