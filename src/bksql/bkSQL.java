@@ -23,6 +23,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
@@ -36,9 +38,19 @@ public class bkSQL extends javax.swing.JFrame {
         initComponents();
 
         setIconImage(icon.getImage());
+
+        jProgressBar.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                jProgressBar.setToolTipText(jProgressBar.getValue() + "%");
+            }
+        });
     }
 
     private void Generate() throws InterruptedException, SAXException, ParserConfigurationException {
+        DisableAll();
+
+        jProgressBar.setValue(0);
+
         String host = jtHost.getText();
         String user = jtUser.getText();
         String password = jpPassword.getText();
@@ -51,6 +63,8 @@ public class bkSQL extends javax.swing.JFrame {
 
         if(Useful.IsNullOrEmpty(host) || Useful.IsNullOrEmpty(user) || Useful.IsNullOrEmpty(password) || Useful.IsNullOrEmpty(db) || Useful.IsNullOrEmpty(saveLocation)) {
             JOptionPane.showMessageDialog(rootPane, "All values are required.", "ERROR", JOptionPane.WARNING_MESSAGE);
+            jProgressBar.setValue(0);
+            bkSQL.EnableAll();
             return;
         }
 
@@ -64,6 +78,8 @@ public class bkSQL extends javax.swing.JFrame {
         String pathNE = APPDATA + "\\exe";
 
         String mysqldump = System.getProperty("user.dir") + "\\lib\\mysqldump.exe";
+
+        jProgressBar.setValue(jProgressBar.getValue() + 10);
 
         try {
             FileWriter fw = new FileWriter(path);
@@ -89,6 +105,8 @@ public class bkSQL extends javax.swing.JFrame {
             bw.write(content);
             bw.close();
             fw.close();
+
+            jProgressBar.setValue(jProgressBar.getValue() + 10);
 
             if(isAutoBackup) {
                 String repeat = "";
@@ -225,6 +243,76 @@ public class bkSQL extends javax.swing.JFrame {
         }
     }
 
+    private void DisableAll() {
+        //JLabels
+        jlHost.setEnabled(false);
+        jlPassword.setEnabled(false);
+        jlUser.setEnabled(false);
+        jlDataBase.setEnabled(false);
+        jlSaveLocation.setEnabled(false);
+        jlHour.setEnabled(false);
+        jlRepeat.setEnabled(false);
+        jlByBrhaka.setEnabled(false);
+        jlCurrentPassword.setEnabled(false);
+
+        //JTextFields
+        jtSaveLocation.setEnabled(false);
+        jtDataBase.setEnabled(false);
+        jtUser.setEnabled(false);
+        jtHost.setEnabled(false);
+        jtHour.setEnabled(false);
+
+        //JPasswordFields
+        jpPassword.setEnabled(false);
+        jpComputerPassword.setEnabled(false);
+
+        //JButtons
+        jbCreate.setEnabled(false);
+
+        //JComboBox
+        jcRepeat.setEnabled(false);
+        jcAllDB.setEnabled(false);
+
+        //JRadio
+        jrManual.setEnabled(false);
+        jrAuto.setEnabled(false);
+    }
+
+     protected static void EnableAll() {
+        //JLabels
+        jlHost.setEnabled(true);
+        jlPassword.setEnabled(true);
+        jlUser.setEnabled(true);
+        jlDataBase.setEnabled(true);
+        jlSaveLocation.setEnabled(true);
+        jlHour.setEnabled(true);
+        jlRepeat.setEnabled(true);
+        jlByBrhaka.setEnabled(true);
+        jlCurrentPassword.setEnabled(true);
+
+        //JTextFields
+        jtSaveLocation.setEnabled(true);
+        jtDataBase.setEnabled(true);
+        jtUser.setEnabled(true);
+        jtHost.setEnabled(true);
+        jtHour.setEnabled(true);
+
+        //JPasswordFields
+        jpPassword.setEnabled(true);
+        jpComputerPassword.setEnabled(true);
+
+        //JButtons
+        jbCreate.setEnabled(true);
+
+        //JComboBox
+        jcRepeat.setEnabled(true);
+        jcAllDB.setEnabled(true);
+
+        //JRadio
+        jrManual.setEnabled(true);
+        jrAuto.setEnabled(true);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -234,6 +322,7 @@ public class bkSQL extends javax.swing.JFrame {
         jlName = new javax.swing.JLabel();
         jTabbedPane = new javax.swing.JTabbedPane();
         jpHome = new javax.swing.JPanel();
+        jProgressBar = new javax.swing.JProgressBar();
         jlHost = new javax.swing.JLabel();
         jlPassword = new javax.swing.JLabel();
         jlUser = new javax.swing.JLabel();
@@ -275,27 +364,22 @@ public class bkSQL extends javax.swing.JFrame {
         jlName.setText("bkSQL");
         jlName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jpHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jProgressBar.setBackground(new java.awt.Color(255, 255, 255));
+        jProgressBar.setForeground(new java.awt.Color(0, 153, 0));
+        jProgressBar.setToolTipText(jProgressBar.getValue() + "%");
+        jProgressBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jProgressBar.setFocusable(false);
+        jProgressBar.setRequestFocusEnabled(false);
 
         jlHost.setText("Host");
-        jpHome.add(jlHost, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, 117, -1));
 
         jlPassword.setText("Password");
-        jpHome.add(jlPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 66, 117, -1));
 
         jlUser.setText("User");
-        jpHome.add(jlUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 117, -1));
 
         jlDataBase.setText("DataBase");
-        jpHome.add(jlDataBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 92, 117, -1));
 
         jlSaveLocation.setText("Save Location");
-        jpHome.add(jlSaveLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 118, 117, -1));
-        jpHome.add(jtSaveLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 115, 255, -1));
-        jpHome.add(jtDataBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 89, 255, -1));
-        jpHome.add(jtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 37, 255, -1));
-        jpHome.add(jtHost, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 11, 255, -1));
-        jpHome.add(jpPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 63, 255, -1));
 
         jbCreate.setText("Create");
         jbCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -304,17 +388,13 @@ public class bkSQL extends javax.swing.JFrame {
                 jbCreateMouseReleased(evt);
             }
         });
-        jpHome.add(jbCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
 
         jlHour.setText("Hour");
-        jpHome.add(jlHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 70, -1));
 
         jlRepeat.setText("Repeat");
-        jpHome.add(jlRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 70, -1));
 
         jcRepeat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Daily", "Weekly", "Monthly", "Once" }));
         jcRepeat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpHome.add(jcRepeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 296, -1));
 
         buttonGroup1.add(jrManual);
         jrManual.setText("Manual backup");
@@ -324,7 +404,6 @@ public class bkSQL extends javax.swing.JFrame {
                 jrManualMouseReleased(evt);
             }
         });
-        jpHome.add(jrManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
 
         buttonGroup1.add(jrAuto);
         jrAuto.setSelected(true);
@@ -335,7 +414,6 @@ public class bkSQL extends javax.swing.JFrame {
                 jrAutoMouseReleased(evt);
             }
         });
-        jpHome.add(jrAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
 
         try {
             jtHour.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
@@ -351,7 +429,6 @@ public class bkSQL extends javax.swing.JFrame {
                 jtHourFocusLost(evt);
             }
         });
-        jpHome.add(jtHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 296, -1));
 
         jlByBrhaka.setForeground(new java.awt.Color(0, 51, 255));
         jlByBrhaka.setText("by Brhaka");
@@ -362,11 +439,8 @@ public class bkSQL extends javax.swing.JFrame {
                 jlByBrhakaMouseReleased(evt);
             }
         });
-        jpHome.add(jlByBrhaka, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, -1, -1));
 
         jlCurrentPassword.setText("Current User Password");
-        jpHome.add(jlCurrentPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 144, 117, -1));
-        jpHome.add(jpComputerPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 141, 255, -1));
 
         jcAllDB.setText("Bakcup all DataBases on server");
         jcAllDB.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -374,7 +448,136 @@ public class bkSQL extends javax.swing.JFrame {
                 jcAllDBMouseReleased(evt);
             }
         });
-        jpHome.add(jcAllDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, -1, -1));
+
+        javax.swing.GroupLayout jpHomeLayout = new javax.swing.GroupLayout(jpHome);
+        jpHome.setLayout(jpHomeLayout);
+        jpHomeLayout.setHorizontalGroup(
+            jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpHomeLayout.createSequentialGroup()
+                .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlHost, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jtHost, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlUser, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlDataBase, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jtDataBase, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlSaveLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jtSaveLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlCurrentPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jpComputerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcAllDB)
+                            .addComponent(jrAuto)
+                            .addComponent(jrManual)))
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlHour, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jtHour, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jpHomeLayout.createSequentialGroup()
+                                .addComponent(jbCreate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jlByBrhaka))
+                            .addGroup(jpHomeLayout.createSequentialGroup()
+                                .addComponent(jlRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jcRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jpHomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpHomeLayout.setVerticalGroup(
+            jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpHomeLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jlHost))
+                    .addComponent(jtHost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jlUser))
+                    .addComponent(jtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jlPassword))
+                    .addComponent(jpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jlDataBase))
+                    .addComponent(jtDataBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jlSaveLocation))
+                    .addComponent(jtSaveLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jlCurrentPassword))
+                    .addComponent(jpComputerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcAllDB)
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jrAuto))
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jrManual)))
+                .addGap(7, 7, 7)
+                .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpHomeLayout.createSequentialGroup()
+                        .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlHour)
+                            .addComponent(jtHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jpHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlRepeat)
+                            .addComponent(jcRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addComponent(jbCreate))
+                    .addComponent(jlByBrhaka))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jTabbedPane.addTab("Home", jpHome);
 
@@ -408,7 +611,7 @@ public class bkSQL extends javax.swing.JFrame {
             .addComponent(jlName, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane.getAccessibleContext().setAccessibleName("Home");
@@ -482,13 +685,9 @@ public class bkSQL extends javax.swing.JFrame {
     public static void main(String args[]) {
         CheckAppData();
 
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -503,8 +702,6 @@ public class bkSQL extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(bkSQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        //</editor-fold>
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new bkSQL().setVisible(true);
@@ -531,32 +728,33 @@ public class bkSQL extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    protected static javax.swing.JProgressBar jProgressBar;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JButton jbCreate;
+    private static javax.swing.JButton jbCreate;
     private javax.swing.JButton jbDeleteAll;
-    private javax.swing.JCheckBox jcAllDB;
-    private javax.swing.JComboBox<String> jcRepeat;
-    private javax.swing.JLabel jlByBrhaka;
-    private javax.swing.JLabel jlCurrentPassword;
-    private javax.swing.JLabel jlDataBase;
-    private javax.swing.JLabel jlHost;
-    private javax.swing.JLabel jlHour;
+    private static javax.swing.JCheckBox jcAllDB;
+    private static javax.swing.JComboBox<String> jcRepeat;
+    private static javax.swing.JLabel jlByBrhaka;
+    private static javax.swing.JLabel jlCurrentPassword;
+    private static javax.swing.JLabel jlDataBase;
+    private static javax.swing.JLabel jlHost;
+    private static javax.swing.JLabel jlHour;
     private javax.swing.JLabel jlName;
     private javax.swing.JLabel jlNameClick;
-    private javax.swing.JLabel jlPassword;
-    private javax.swing.JLabel jlRepeat;
-    private javax.swing.JLabel jlSaveLocation;
-    private javax.swing.JLabel jlUser;
-    private javax.swing.JPasswordField jpComputerPassword;
+    private static javax.swing.JLabel jlPassword;
+    private static javax.swing.JLabel jlRepeat;
+    private static javax.swing.JLabel jlSaveLocation;
+    private static javax.swing.JLabel jlUser;
+    private static javax.swing.JPasswordField jpComputerPassword;
     private javax.swing.JPanel jpHome;
     private javax.swing.JPanel jpOthers;
-    private javax.swing.JPasswordField jpPassword;
-    private javax.swing.JRadioButton jrAuto;
-    private javax.swing.JRadioButton jrManual;
-    private javax.swing.JTextField jtDataBase;
-    private javax.swing.JTextField jtHost;
-    private javax.swing.JFormattedTextField jtHour;
-    private javax.swing.JTextField jtSaveLocation;
-    private javax.swing.JTextField jtUser;
+    private static javax.swing.JPasswordField jpPassword;
+    private static javax.swing.JRadioButton jrAuto;
+    private static javax.swing.JRadioButton jrManual;
+    private static javax.swing.JTextField jtDataBase;
+    private static javax.swing.JTextField jtHost;
+    private static javax.swing.JFormattedTextField jtHour;
+    private static javax.swing.JTextField jtSaveLocation;
+    private static javax.swing.JTextField jtUser;
     // End of variables declaration//GEN-END:variables
 }
