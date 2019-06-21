@@ -1,6 +1,6 @@
 # bkSQL
 
-[![Github All Releases](https://img.shields.io/github/downloads/brhaka/bkSQL/total.svg)]()
+[![Github All Releases](https://img.shields.io/github/downloads/brhaka/bkSQL/total.svg)](https://github.com/brhaka/bkSQL/)
 
 bkSQL will auto-backup your remote DataBases.
 
