@@ -24,8 +24,6 @@ Thank you!
 
 ## Prerequisites
 
-What things you need to install the software and how to install them
-
 ```
  NetBeans 8.2 IDE
 ```
@@ -58,19 +56,19 @@ How to open bkSQL as NetBeans project and code it.
 Installing Java
 
 ```
-Download JDK 1.8 and JRE 1.8^, than open the installer and follow the steps.
+Download JDK 1.8 and JRE 1.8^, than open the installer and follow the on-screen steps.
 ```
 
 Installing NetBeans
 
 ```
-Download NetBeans than install it by opening installer and following the steps.
+Download and run the NetBeans installer and follow the displayed steps.
 ```
 
 NetBeans project
 
 ```
-After installing JDK, JRE, NetBeans and after clone bkSQL, open up NetBeans, click on File -> Open Project -> (Go to the folder were bkSQL is located and click on it) -> Open Project.
+After installing JDK, JRE, NetBeans and after cloning bkSQL, open up NetBeans, click on File -> Open Project -> (Go to the folder were bkSQL is located and click on it) -> Open Project.
 ```
 
 ### Compiling
@@ -88,29 +86,28 @@ Open bkSQL on NetBeans than click on "Clean and Build Project".
 Building .exe
 
 ```
-Open Launch4j and select the buildConf_bkSQL.xml file on /bin/. After that, click on "Build wrapper".
+Open Launch4j and select the buildConf_bkSQL.xml file on /bin/. Then, click on "Build wrapper".
 ```
 
 Building Installer / Setup
 
 ```
-Open Inno Setup Compiler and select the bkSQL.iss file on /bin/. After that, click on "Compile".
+Open Inno Setup Compiler and select the bkSQL.iss file on /bin/. Then, click on "Compile".
 ```
 
 ## Error codes
 
 If you're getting any errors, take a look at the [Error Codes](https://github.com/brhaka/bkSQL/wiki/Error-Codes) Wiki page for details
 
-## Authors
+## Author
 
-* **Brhaka** - *Company* - [brhaka-Github](https://github.com/brhaka), [brhaka-WebSite](https://brhaka.com)
-* **Eduardo Julião Martinez** - *Developer* - [WebSite](https://brhaka.com)
+* **Brhaka** - [brhaka-Github](https://github.com/brhaka), [brhaka-WebSite](https://brhaka.com)
 
 ## License
 
-This project is licensed under the **RECEX SHARED SOURCE LICENSE** (1.0) - see the [LICENSE](LICENSE.md) file for details
+This project is licensed under the **RECEX SHARED SOURCE LICENSE** (1.0) - read the [LICENSE](LICENSE.md) file for details
 
 ## Contact
 
-E-Mail: support@brhaka.com <br />
-WebSite: https://brhaka.com/#projetos
+Email: support@brhaka.com <br />
+Website: https://brhaka.com/#projetos
